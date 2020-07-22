@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.task.java.dao.UserDao;
+import com.task.java.model.UserDetailsModel;
 import com.task.java.model.UserModel;
 
 
@@ -27,7 +28,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	
 	  @Override 
 	  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
-	  UserModel user = userDao.findByUsername(username);
+   UserModel user = userDao.findByUsername(username);
 	  if (user == null)
 	      { 
 		       throw new UsernameNotFoundException("User not found with username: " + username);

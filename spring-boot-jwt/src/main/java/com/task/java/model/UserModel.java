@@ -3,14 +3,20 @@ package com.task.java.model;
 
 
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "user_master")
-public class UserModel {
+public class UserModel{
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
@@ -20,8 +26,12 @@ public class UserModel {
 	@Column
 	private String password;
 	
+	/*
+	 * @Column private String roleid;
+	 */
+	
 	@Column
-	private String roleid;
+	private int roleid;
 	
 	@Column
 	private String createdDate;
@@ -34,6 +44,40 @@ public class UserModel {
 	
 	@Column
 	private String last_login;
+	
+	//@OneToMany(targetEntity=UserContactModel.class,cascade=CascadeType.ALL)
+	//@JoinColumn(name="ucd_id", referencedColumnName="uc_id")
+	//@OneToMany(mappedBy="userModel")
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY,cascade =  CascadeType.ALL,mappedBy="userModel")
+	private Set<UserContactModel> userContactModel;
+	
+	/*
+	 * @OneToOne(fetch =
+	 * FetchType.LAZY,targetEntity=UserDetailsModel.class,cascade=CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name="umn_id",referencedColumnName="ud_id") private
+	 * UserDetailsModel userDetailsModel;
+	 */
+	
+	@JsonManagedReference//resolve the error of StackOverflowError
+	@OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL,mappedBy = "userModel")
+    private UserDetailsModel userDetailsModel;
+
+	public UserModel() {
+	}
+
+	public UserModel(int id, String username, String password, int roleid, String createdDate, String updatedDate,
+			String active, String last_login) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.roleid = roleid;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+		this.active = active;
+		this.last_login = last_login;
+	}
 
 	public int getId() {
 		return id;
@@ -59,11 +103,11 @@ public class UserModel {
 		this.password = password;
 	}
 
-	public String getRoleid() {
+	public int getRoleid() {
 		return roleid;
 	}
 
-	public void setRoleid(String roleid) {
+	public void setRoleid(int roleid) {
 		this.roleid = roleid;
 	}
 
@@ -99,14 +143,28 @@ public class UserModel {
 		this.last_login = last_login;
 	}
 
+	public Set<UserContactModel> getUserContactModel() {
+		return userContactModel;
+	}
+
+	public void setUserContactModel(Set<UserContactModel> userContactModel) {
+		this.userContactModel = userContactModel;
+	}
+
+	public UserDetailsModel getUserDetailsModel() {
+		return userDetailsModel;
+	}
+
+	public void setUserDetailsModel(UserDetailsModel userDetailsModel) {
+		this.userDetailsModel = userDetailsModel;
+	}
+
 	@Override
 	public String toString() {
 		return "UserModel [id=" + id + ", username=" + username + ", password=" + password + ", roleid=" + roleid
 				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", active=" + active
-				+ ", last_login=" + last_login + "]";
+				+ ", last_login=" + last_login + ", userContactModel=" + userContactModel + ", userDetailsModel="
+				+ userDetailsModel + "]";
 	}
-
-	
-	
 
 }

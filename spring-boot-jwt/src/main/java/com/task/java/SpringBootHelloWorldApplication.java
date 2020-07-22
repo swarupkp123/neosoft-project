@@ -1,9 +1,10 @@
 package com.task.java;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-@EnableAutoConfiguration
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+@EnableTransactionManagement
 @SpringBootApplication
 public class SpringBootHelloWorldApplication {
 

@@ -3,6 +3,9 @@ package com.task.java.controller;
 
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,10 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.task.java.config.JwtTokenUtil;
 import com.task.java.dao.UserDao;
 import com.task.java.model.UserModel;
+import com.task.java.pojo.UserDetailsPojo;
 import com.task.java.pojo.UserPojo;
 import com.task.java.model.JwtRequest;
 import com.task.java.model.JwtResponse;
-
+import com.task.java.model.UserDetailsModel;
 import com.task.java.service.JwtUserDetailsService;
 import com.task.java.service.UserService;
 
@@ -62,18 +66,50 @@ public class JwtAuthenticationController {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new JwtResponse(token));
+		LocalDateTime dateTime = LocalDateTime.now(); // Gets the current date and time
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		final String time = dateTime.format(formatter);
+		return ResponseEntity.ok(new JwtResponse(token,time));
 	}
 	
+	
+	
+	
+	  //for register
+	  @RequestMapping(value = "/register", method = RequestMethod.POST) 
+	  public ResponseEntity<String> saveUser(@Valid @RequestBody UserPojo user){ 
+		  logger.info("/save user details"); 
+		  UserModel daoUser = userService.saveUser(user);
+		  return new ResponseEntity<>("user created",HttpStatus.OK); 
+		  }
+	 
+	 
+	 
+	
+	
+	
+	/*
+	 * @RequestMapping(value = "/register", method = RequestMethod.POST) public
+	 * ResponseEntity<String> saveUser(@Valid @RequestBody UserPojo user) throws
+	 * Exception { logger.info("/save user details"); int i =
+	 * userService.saveUser(user); return new ResponseEntity<>("user created",
+	 * HttpStatus.OK);
+	 * 
+	 * }
+	 */
+	
+	
+	
 	//for register
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<String> saveUser(@Valid @RequestBody UserPojo user) throws Exception {
-		logger.info("/save user details");
-		
-		UserModel daoUser = userService.saveUser(user);
-		return new ResponseEntity<>("user created", HttpStatus.OK);
-		
-	}
+	/*
+	 * @RequestMapping(value = "/register", method = RequestMethod.POST) public
+	 * ResponseEntity<String> saveUser(@Valid @RequestBody UserPojo user) throws
+	 * Exception { logger.info("/save user details"); UserDetailsModel daoUser =
+	 * userService.saveUser(user); return new ResponseEntity<>("user created",
+	 * HttpStatus.OK);
+	 * 
+	 * }
+	 */
 
 	private void authenticate(String username, String password) throws Exception {
 		try {
