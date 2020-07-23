@@ -184,6 +184,7 @@ public class UserService {
 	  
 	  public List<UserDetailsModel> getUserByName(String name) { 
 		  // TODO Auto-generated method stub 
+		  
 		  return userDetailsDao.findByName(name);
 		  }
 	 

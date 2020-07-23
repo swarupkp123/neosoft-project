@@ -62,9 +62,9 @@ public class UserDetailsModel{
 		super();
 	}
 
-	public UserDetailsModel(int ud_id, String name, String surname, String dob, String gender, String created_date,
+	public UserDetailsModel(String name, String surname, String dob, String gender, String created_date,
 			String updated_date, String status) {
-		this.ud_id = ud_id;
+		//this.ud_id = ud_id;
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;

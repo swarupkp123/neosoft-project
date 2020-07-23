@@ -16,6 +16,24 @@ public class UserContactPojo {
 	private String created_date;
 	private String updated_date;
 	private String status;
+	
+	
+	
+	
+	
+	
+	public UserContactPojo(String address, String pincode, String city, String state, String country, String type,
+			String created_date, String updated_date, String status) {
+		this.address = address;
+		this.pincode = pincode;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.type = type;
+		this.created_date = created_date;
+		this.updated_date = updated_date;
+		this.status = status;
+	}
 	public int getUc_id() {
 		return uc_id;
 	}

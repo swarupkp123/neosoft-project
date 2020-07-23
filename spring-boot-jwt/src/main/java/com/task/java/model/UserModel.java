@@ -67,9 +67,23 @@ public class UserModel{
 	public UserModel() {
 	}
 
-	public UserModel(int id, String username, String password, int roleid, String createdDate, String updatedDate,
-			String active, String last_login) {
-		this.id = id;
+	/*
+	 * public UserModel(int id, String username, String password, int roleid, String
+	 * createdDate, String updatedDate, String active, String last_login) { this.id
+	 * = id; this.username = username; this.password = password; this.roleid =
+	 * roleid; this.createdDate = createdDate; this.updatedDate = updatedDate;
+	 * this.active = active; this.last_login = last_login; }
+	 */
+	
+	
+	
+
+	
+
+	public UserModel(String username, String password, int roleid, String createdDate, String updatedDate,
+			String active, String last_login, Set<UserContactModel> userContactModel,
+			UserDetailsModel userDetailsModel) {
+		//this.id = id;
 		this.username = username;
 		this.password = password;
 		this.roleid = roleid;
@@ -77,12 +91,14 @@ public class UserModel{
 		this.updatedDate = updatedDate;
 		this.active = active;
 		this.last_login = last_login;
+		this.userContactModel = userContactModel;
+		this.userDetailsModel = userDetailsModel;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}

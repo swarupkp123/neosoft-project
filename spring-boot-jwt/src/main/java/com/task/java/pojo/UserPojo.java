@@ -31,9 +31,23 @@ public class UserPojo implements Serializable{
 	
 	
 
-	public UserPojo(int id, String username, String password, int roleid, String createdDate, String updatedDate,
-			String active, String last_login) {
-		this.id = id;
+	/*
+	 * public UserPojo(int id, String username, String password, int roleid, String
+	 * createdDate, String updatedDate, String active, String last_login) { this.id
+	 * = id; this.username = username; this.password = password; this.roleid =
+	 * roleid; this.createdDate = createdDate; this.updatedDate = updatedDate;
+	 * this.active = active; this.last_login = last_login; }
+	 */
+	
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public UserPojo(String username, String password, int roleid, String createdDate, String updatedDate, String active,
+			String last_login, UserDetailsPojo userDetailsPojo, Set<UserContactPojo> userContactPojos) {
 		this.username = username;
 		this.password = password;
 		this.roleid = roleid;
@@ -41,10 +55,8 @@ public class UserPojo implements Serializable{
 		this.updatedDate = updatedDate;
 		this.active = active;
 		this.last_login = last_login;
-	}
-
-	public int getId() {
-		return id;
+		this.userDetailsPojo = userDetailsPojo;
+		this.userContactPojos = userContactPojos;
 	}
 
 	public void setId(int id) {

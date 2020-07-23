@@ -12,6 +12,22 @@ public class UserDetailsPojo {
 	private String created_date;
 	private String updated_date;
 	private String status;
+	
+	
+	
+	
+	
+	
+	public UserDetailsPojo(String name, String surname, String dob, String gender, String created_date,
+			String updated_date, String status) {
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.gender = gender;
+		this.created_date = created_date;
+		this.updated_date = updated_date;
+		this.status = status;
+	}
 	public int getUd_id() {
 		return ud_id;
 	}
